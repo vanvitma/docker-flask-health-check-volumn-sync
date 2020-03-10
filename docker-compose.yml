@@ -11,7 +11,7 @@ services:
       # test: status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:5000/) && [ $status_code == 200 ] && exit 0 || exit 1
       # test: ["CMD-SHELL", "curl --fail --silent --output /dev/null http://localhost:5000/ && exit 0 || ( echo 'test_dump' > dump.txt && exit 1 )"]
       # test: ["CMD-SHELL", "curl --fail --silent --output /dev/null http://localhost:5000/ && exit 0 || ( jstack 1 >> jstack_threads_dump.txt && exit 1 )"]
-      test: curl --fail --silent --output /dev/null http://localhost:5000/ && exit 0 || (echo 'test_dump' > /app/logs/dump.txt && exit 1 )
+      test: curl --fail --silent --output /dev/null http://localhost:5000/ && exit 0 || (cd /app/logs && echo 'test_dump' > "dump-`date -Iseconds`.txt" && exit 1 )
       interval: 6s
       timeout: 2s
       start_period: 5s
